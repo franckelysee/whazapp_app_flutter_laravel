@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tuto_doctor_appointement/next_element.dart';
+import 'package:tuto_doctor_appointement/main_layout.dart';
+import 'package:tuto_doctor_appointement/screens/auth_page.dart';
+import 'package:tuto_doctor_appointement/utils/config.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,86 +9,47 @@ void main() {
 const Color primaryColor = Color(0xFF075E54);
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  //this is for push navigator
+  static final navigatorKey = GlobalKey<NavigatorState>();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //define themedata here
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flutter Doctor App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'WhatsApp'),
-    );
-  }
-}
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(title: widget.title),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text("GO TO NEXT"),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const NextElement()),
-            );
-          },
+        //pre-define iput decoration
+        inputDecorationTheme: const InputDecorationTheme(
+          focusColor: Config.primaryColor,
+          border: Config.outlinedBorder,
+          focusedBorder: Config.focusBorder,
+          errorBorder: Config.errorBorder,
+          enabledBorder: Config.outlinedBorder,
+          floatingLabelStyle: TextStyle(color: Config.primaryColor),
+          prefixIconColor: Colors.black38
         ),
+        scaffoldBackgroundColor: Colors.white,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Config.primaryColor,
+          selectedItemColor: Colors.white,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          unselectedItemColor: Colors.grey.shade700,
+          elevation: 10,
+          type: BottomNavigationBarType.fixed
+        )
       ),
-    );
-  }
-}
+      initialRoute: '/',
+      routes: {
+        //this is initial route of the app
+        // which is page (login and signup)
 
+        '/':(context) => const AutPage(),
+        "main":(context) => const MainLayout(),
 
-
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  Size get preferredSize => new  Size.fromHeight(50.0);
-  const MyAppBar({super.key, required this.title});
-
-  final String title; 
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: primaryColor,
-      title: Row(
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(color: Colors.white),
-          ),
-          Spacer(),
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      },
     );
   }
 }
