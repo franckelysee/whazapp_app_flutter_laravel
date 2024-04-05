@@ -138,7 +138,9 @@ class _HomePageState extends State<HomePage> {
                 Config.spaceSmall,
                 Column(
                   children: List<Widget>.generate(10, (index){
-                    return DoctorCard();
+                    return DoctorCard(
+                      route: "doctor_details",
+                    );
                   })
                 ),
                 
