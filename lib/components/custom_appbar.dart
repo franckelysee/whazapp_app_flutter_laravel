@@ -24,6 +24,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       automaticallyImplyLeading: true,
       backgroundColor: Colors.white,
       elevation: 0,
+      centerTitle: true,
       title: Text(widget.title!, style: const TextStyle(fontSize:20,color: Colors.black),),
       leading: widget.icon != null ? Container(
         margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),

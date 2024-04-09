@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tuto_doctor_appointement/main_layout.dart';
 import 'package:tuto_doctor_appointement/screens/auth_page.dart';
+import 'package:tuto_doctor_appointement/screens/booking_page.dart';
 import 'package:tuto_doctor_appointement/screens/doctor_details.dart';
 import 'package:tuto_doctor_appointement/utils/config.dart';
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/':(context) => const AutPage(),
         "main":(context) => const MainLayout(),
         'doctor_details':(context) => const DoctorDetails(),
+        'booking_page':(context) => const BookingPage(),
 
       },
     );
