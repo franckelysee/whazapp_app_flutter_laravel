@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:tuto_doctor_appointement/components/button.dart';
 import 'package:tuto_doctor_appointement/components/custom_appbar.dart';
 import 'package:tuto_doctor_appointement/utils/config.dart';
 
@@ -69,7 +70,7 @@ class _BookingPageState extends State<BookingPage> {
             ),
           ): SliverGrid(
             delegate: SliverChildBuilderDelegate((context, index) {
-              return InkWell(
+              return index +9 <= 17 ?  InkWell(
                 splashColor: Colors.transparent,
                 onTap: () {
                   setState(() {
@@ -77,7 +78,7 @@ class _BookingPageState extends State<BookingPage> {
                     _timeSelected = true;
                   });
                 },
-                child: index +9 <= 17 ? Container(
+                child: Container(
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -97,8 +98,8 @@ class _BookingPageState extends State<BookingPage> {
                       color: _currentIndex == index ? Colors.white : null
                     ),
                   ),
-                ): null,
-              );
+                ),
+              ): null;
             }),
 
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -106,6 +107,21 @@ class _BookingPageState extends State<BookingPage> {
               childAspectRatio: 1.5
             ),
           
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 10),
+              child: Button(
+                width: double.infinity,
+                title: 'Make Appointment',
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context).pushNamed("success_booking");
+                  });
+                },
+                disable: _timeSelected & _dateSelected? false : true,
+              ),
+            ),
           )
         ],
       ),
